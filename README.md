@@ -1,8 +1,8 @@
-# Hey new users!
+# Hey users!
 
 This is a Photoshop Script that will allow you to export all of the text layers from your PSD. 
 
-Two version: 
+## Two version: 
 
 Text Export.jsx - export only text with layer name
 
