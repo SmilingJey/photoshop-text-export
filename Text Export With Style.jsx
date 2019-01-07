@@ -28,7 +28,7 @@
 	// Export layer path 
 	var exportLayerPath = true;
 	// Export styles
-	var exportStyles = false;
+	var exportStyles = true;
  /**
   * NO NEED TO CHANGE ANYTHING BENEATH THIS LINE
   * -------------------------------------------------------------
@@ -136,7 +136,6 @@
 							fileOut.writeln('font-family: "'+currentLayer.textItem.font + '";');
 							var fontSize = parseInt(currentLayer.textItem.size);
 							fileOut.writeln('font-size: ' + fontSize + 'px;');
-							fileOut.writeln('color: #'+(currentLayer.textItem.color.rgb.hexValue?currentLayer.textItem.color.rgb.hexValue:'') + ';');
 							fileOut.writeln('color: #'+(currentLayer.textItem.color.rgb.hexValue?currentLayer.textItem.color.rgb.hexValue:'') + ';');
 							//fileOut.writeln('* capitalization: '+(currentLayer.textItem.capitalization=="TextCase.NORMAL"?"normal":"uppercase"));
 							//fileOut.writeln('* fauxBold: '+(currentLayer.textItem.fauxBold?currentLayer.textItem.fauxBold:''));
