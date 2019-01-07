@@ -1,22 +1,19 @@
 # Hey new users!
 
-This script is super old. It was 4 years old when I adapted it from bram.us back in 2012, so if it doesn't work you're on your own!
+This is a Photoshop Script that will allow you to export all of the text layers from your PSD. 
 
-## Photoshop Text Export
+Two version: 
+Text Export.jsx - export only text with layer name
+Text Export With Style.jsx - export text and it styles (only font-family, font-size and color)
 
-This is a Photoshop Script that will allow you to export all of the text layers from your PSD along with their font styles.
+I tested it in Photoshop CC 2018 and it seems to work.
 
-Currently the script does not support multiple font styles on one text layer.
-
-This is based on the 'PS_BRAMUS Text Export 1.3' script from [bram.us](http://www.bram.us/2008/03/16/ps_bramustextexport-13-automatically-export-all-text-layers-from-photoshop-psd-to-a-text-file/)
-
+This is based on the https://github.com/omgmog/photoshop-text-export
 
 ### Installation
 
-1. Copy `Text Export.jsx` to your Photoshop Scripts folder (`/Applications/Adobe Photoshop CS4/Presets/Scripts/`)
+1. Copy `Text Export.jsx` to your Photoshop Scripts folder (`/Applications/Adobe Photoshop CS4/Presets/Scripts/` `c:\Program Files\Adobe\Adobe Photoshop CC 2018\Presets\Scripts\`)
 2. Start (or Re-launch) Photoshop
 3. Go to the `File` menu
 4. Go to the `Script` menu
-5. Click `Text Export` and select a place to save your output
-
-This might not work in Adobe Photoshop CS6.
+5. Click `Text Export` or `Text Export With Style` and select a place to save your output
