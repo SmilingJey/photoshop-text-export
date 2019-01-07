@@ -3,9 +3,7 @@
 This is a Photoshop Script that will allow you to export all of the text layers from your PSD. 
 
 Two version: 
-
 Text Export.jsx - export only text with layer name
-
 Text Export With Style.jsx - export text and it styles (only font-family, font-size and color)
 
 I tested it in Photoshop CC 2018 and it seems to work.
