@@ -33,6 +33,11 @@ var exportStyles = true;
 var createFontsList = true;
 
 var fontsList = [];
+var fontsCountList = [];
+
+var createColorList = true;
+var colorsList = [];
+var colorsCountList = [];
 
 /**
  *  TextExport Init function
@@ -98,8 +103,18 @@ function initTextExport() {
 		if (createFontsList) {
 			fileOut.writeln("Fonts used in the document:");
 			for (var i = 0; i < fontsList.length; i++) {
-				fileOut.writeln(fontsList[i]);
+				fileOut.writeln(fontsList[i] + " " + fontsCountList[i]);
 			}
+			fileOut.writeln("");
+		}
+
+		// write colors list
+		if (createColorList) {
+			fileOut.writeln("Colors used in the document:");
+			for (var i = 0; i < colorsList.length; i++) {
+				fileOut.writeln(colorsList[i] + " " + colorsCountList[i]);
+			}
+			fileOut.writeln("");
 		}
 		// close the file
 		fileOut.close();
@@ -149,28 +164,72 @@ function goTextExport2(el, fileOut, path) {
 				fileOut.writeln(currentLayer.textItem.contents);
 
 				if (exportStyles && currentLayer.textItem.contents) {
-					//fileOut.writeln('Styles:');
-					fileOut.writeln('font-family: "' + currentLayer.textItem.font + '";');
+					//export font
+					try {
+						fileOut.writeln('font-family: "' + currentLayer.textItem.font + '";');
 
-					if (createFontsList && indexOf(fontsList, currentLayer.textItem.font) === -1) {
-						if (createFontsList && indexOf(currentLayer.textItem.font) === -1) {
-							fontsList.push(currentLayer.textItem.font);
+						if (createFontsList) {
+							var fontIndex = indexOf(fontsList, currentLayer.textItem.font);
+							if (fontIndex === -1) {
+								fontsList.push(currentLayer.textItem.font);
+								fontsCountList.push(1);
+							} else {
+								fontsCountList[fontIndex] = fontsCountList[fontIndex] + 1;
+							}
 						}
+					} catch (e) {}
 
+					//export font size
+					try {
 						var fontSize = parseInt(currentLayer.textItem.size);
 						fileOut.writeln('font-size: ' + fontSize + 'px;');
-						fileOut.writeln('color: #' + (currentLayer.textItem.color.rgb.hexValue ? currentLayer.textItem.color.rgb.hexValue : '') + ';');
-						//fileOut.writeln('* capitalization: '+(currentLayer.textItem.capitalization=="TextCase.NORMAL"?"normal":"uppercase"));
-						//fileOut.writeln('* fauxBold: '+(currentLayer.textItem.fauxBold?currentLayer.textItem.fauxBold:''));
-						//fileOut.writeln('* fauxItalic: '+(currentLayer.textItem.fauxItalic?currentLayer.textItem.fauxItalic:''));
-						//fileOut.writeln('leading: '+(currentLayer.textItem.leading=='auto-leading'?'auto':currentLayer.textItem.leading));
-						//fileOut.writeln('* tracking: '+(currentLayer.textItem.fauxItalic?currentLayer.textItem.fauxItalic:''));
-					}
-					fileOut.writeln('');
+					} catch (e) {}
+
+					//export line height
+					try {
+						var fontLeading = parseInt(currentLayer.textItem.leading);
+						fileOut.writeln('line-height: ' + fontLeading + 'px;');
+					} catch (e) {}
+
+					//export font weight
+					try {
+						var fauxBold = currentLayer.textItem.fauxBold;
+						if (fauxBold) fileOut.writeln('text-weight: bold');
+					} catch (e) {}
+
+					//export font style
+					try {
+						var fauxItalic = currentLayer.textItem.fauxItalic;
+						if (fauxItalic) fileOut.writeln('text-style: italic');
+					} catch (e) {}
+
+					//export capitalization
+					try {
+						var capitalization = currentLayer.textItem.capitalization;
+						if (capitalization == "TextCase.ALLCAPS") fileOut.writeln('text-transform: uppercase');
+					} catch (e) {}
+
+					//export color
+					try {
+						var color = "#" + currentLayer.textItem.color.rgb.hexValue;
+						fileOut.writeln('color: ' + color + ';');
+
+						if (createColorList) {
+							var colorIndex = indexOf(colorsList, color);
+							if (colorIndex === -1) {
+								colorsList.push(color);
+								colorsCountList.push(1);
+							} else {
+								colorsCountList[colorIndex] = colorsCountList[colorIndex] + 1;
+							}
+						}
+					} catch (e) {}
 				}
+				fileOut.writeln('');
 			}
 		}
 	}
 }
+
 
 initTextExport();
